@@ -1,0 +1,46 @@
+@keyframes rotate360 {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+.Card{
+    width: 20rem;
+}
+
+.Container
+{
+    background-color: darkslateblue;
+}
+
+.img-thumbnail
+{
+ background-color: unset!important;
+ border-color: darkslateblue!important;
+ width: 10%!important;
+}
+
+.rotate
+{
+    animation: rotate360 30s linear infinite;
+}
+
+.welcome
+{
+    color: white;
+}
+
+.btn-info
+{
+    color: white;
+
+    &:hover
+    {
+        color: white;
+    }
+
+}
+
