@@ -3,6 +3,7 @@ import './App.css'
 import { SignupPage } from './pages/signupPage/SignupPage'
 import { HomePage } from './pages/homePage/HomePage'
 import { LoginPage } from './pages/loginPage/LoginPage'
+import { UserPage } from './pages/userPage/UserPage'
 
 //import { useEffect, useState } from 'react'
 
@@ -17,6 +18,8 @@ function App() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/user" element={<UserPage />} />
+        <Route path="/user/:id" element={<UserPage />} />
 
 
       </Routes>
