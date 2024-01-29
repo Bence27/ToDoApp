@@ -1,16 +1,13 @@
-import { Navigate, Route, Routes } from 'react-router-dom'
-import './App.css'
-import { SignupPage } from './pages/signupPage/SignupPage'
-import { HomePage } from './pages/homePage/HomePage'
-import { LoginPage } from './pages/loginPage/LoginPage'
-import { UserPage } from './pages/userPage/UserPage'
+import { Navigate, Route, Routes } from 'react-router-dom';
+import './App.css';
+import { SignupPage } from './pages/signupPage/SignupPage';
+import { HomePage } from './pages/homePage/HomePage';
+import { LoginPage } from './pages/loginPage/LoginPage';
+import { UserPage } from './pages/userPage/UserPage';
 
 //import { useEffect, useState } from 'react'
 
 function App() {
-
-
-
   return (
     <div>
       <Routes>
@@ -20,11 +17,9 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/user" element={<UserPage />} />
         <Route path="/user/:id" element={<UserPage />} />
-
-
       </Routes>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

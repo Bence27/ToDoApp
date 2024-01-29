@@ -17,9 +17,11 @@ model User{
   email String @unique
   hash String
   username String
+  image    String?
 
   todos ToDo[]
   @@map("users")
+  
   
 }
 
@@ -29,10 +31,9 @@ model ToDo{
   description String?
   createdAt DateTime @default(now())
   expireAt DateTime
-  remainingDays Int @default(0)
 
   userId Int
-  user User @relation(fields: [userId],references: [id])
+  user User @relation(fields: [userId],references: [id], onDelete: Cascade)
 
   @@map("todos")
 }
