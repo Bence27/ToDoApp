@@ -4,8 +4,7 @@ import { SignupPage } from './pages/signupPage/SignupPage';
 import { HomePage } from './pages/homePage/HomePage';
 import { LoginPage } from './pages/loginPage/LoginPage';
 import { UserPage } from './pages/userPage/UserPage';
-
-//import { useEffect, useState } from 'react'
+import { AdminPage } from './pages/adminPage/AdminPage';
 
 function App() {
   return (
@@ -15,8 +14,8 @@ function App() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/user" element={<UserPage />} />
         <Route path="/user/:id" element={<UserPage />} />
+        <Route path="/admin/:id" element={<AdminPage />} />
       </Routes>
     </div>
   );

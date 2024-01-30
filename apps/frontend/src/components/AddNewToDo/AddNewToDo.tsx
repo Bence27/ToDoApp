@@ -9,9 +9,16 @@ interface AddNewToDoProps {
   onHide: () => void;
   show: boolean;
   access_token: string;
+  email: string;
 }
 
-export const AddNewToDo: React.FC<AddNewToDoProps> = ({ userId, onHide, show, access_token }) => {
+export const AddNewToDo: React.FC<AddNewToDoProps> = ({
+  userId,
+  onHide,
+  show,
+  access_token,
+  email
+}) => {
   const [alert, setAlert] = useState({ type: '', message: '', header: '' });
   const [endDate, setEndDate] = useState(new Date());
   const [title, setTitle] = useState('');
@@ -25,7 +32,8 @@ export const AddNewToDo: React.FC<AddNewToDoProps> = ({ userId, onHide, show, ac
           title: title,
           userId: userId,
           description: description,
-          expireAt: endDate.toISOString()
+          expireAt: endDate.toISOString(),
+          email: email
         },
         {
           headers: {

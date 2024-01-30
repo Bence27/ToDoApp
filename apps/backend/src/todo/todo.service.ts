@@ -1,10 +1,14 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { PrismamoduleService } from 'src/prismamodule/prismamodule.service';
 import { todoDtoCreate, todoDtoDelete, todoDtoUpdate } from './dto';
+import { EmailService } from 'src/email/email.service';
 
 @Injectable()
 export class TodoService {
-  constructor(private prismaService: PrismamoduleService) {}
+  constructor(
+    private prismaService: PrismamoduleService,
+    private emailService: EmailService,
+  ) {}
 
   async getToDos(userId: number) {
     const todos = this.prismaService.toDo.findMany({
@@ -35,6 +39,11 @@ export class TodoService {
         expireAt: dto.expireAt,
       },
     });
+    this.emailService.sendMail(
+      dto.email,
+      'ToDo Updated',
+      `ToDo created \n Title: ${dto.title} \n Description: ${dto.description} \n Expire at: ${dto.expireAt}`,
+    );
   }
 
   async createToDo(dto: todoDtoCreate) {
@@ -46,6 +55,11 @@ export class TodoService {
         description: dto.description,
       },
     });
+    this.emailService.sendMail(
+      dto.email,
+      'ToDo created',
+      `ToDo created \n Title: ${dto.title} \n Description: ${dto.description} \n Expire at: ${dto.expireAt}`,
+    );
     return { todo };
   }
 

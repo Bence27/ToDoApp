@@ -1,10 +1,11 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { PrismamoduleService } from 'src/prismamodule/prismamodule.service';
-import { AuthDtoLogin, AuthDtoSignUp } from './dto';
+import { AuthDtoForAdmin, AuthDtoLogin, AuthDtoSignUp } from './dto';
 import * as argon from 'argon2';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { EmailService } from 'src/email/email.service';
 
 @Injectable()
 export class AuthService {
@@ -12,19 +13,27 @@ export class AuthService {
     private prisma: PrismamoduleService,
     private jwt: JwtService,
     private config: ConfigService,
+    private mailer: EmailService,
   ) {}
 
   async signup(dto: AuthDtoSignUp) {
     const hash = await argon.hash(dto.password);
+    const isadmin = dto.username.includes('admin');
     try {
       const user = await this.prisma.user.create({
         data: {
           email: dto.email,
           hash,
           username: dto.username,
+          isadmin,
         },
       });
       delete user.hash;
+      this.mailer.sendMail(
+        user.email,
+        'Sign Up',
+        `Hello ${user.username} ! Thanks for Signing up`,
+      );
       return user;
     } catch (error) {
       if (error instanceof PrismaClientKnownRequestError) {
@@ -58,13 +67,30 @@ export class AuthService {
     }
 
     delete user.hash;
-    return this.signToken(user.id, user.email);
+    return this.signToken(user.id, user.email, user.isadmin);
+  }
+
+  async getAccessForAdmin(dto: AuthDtoForAdmin) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        email: dto.email,
+      },
+    });
+
+    delete user.hash;
+    return this.signToken(user.id, user.email, user.isadmin);
   }
 
   async signToken(
     userId: number,
     email: string,
-  ): Promise<{ access_token: string; id: number }> {
+    isadmin: boolean,
+  ): Promise<{
+    access_token: string;
+    id: number;
+    isadmin: boolean;
+    email: string;
+  }> {
     const payload = {
       sub: userId,
       email,
@@ -80,6 +106,8 @@ export class AuthService {
     return {
       access_token: token,
       id: userId,
+      isadmin: isadmin,
+      email: email,
     };
   }
 }

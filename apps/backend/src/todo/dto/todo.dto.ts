@@ -14,6 +14,10 @@ export class todoDtoCreate {
   @IsNumber()
   @IsNotEmpty()
   userId: number;
+
+  @IsNotEmpty()
+  @IsString()
+  email: string;
 }
 
 export class todoDtoUpdate {
@@ -29,6 +33,10 @@ export class todoDtoUpdate {
 
   @IsNumber()
   id: number;
+
+  @IsNotEmpty()
+  @IsString()
+  email: string;
 }
 
 export class todoDtoDelete {

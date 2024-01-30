@@ -7,6 +7,16 @@ export interface UserModel {
   email: string;
   id: number;
   createdAt: Date;
-  image: string;
+  image: string | null;
+  isadmin: boolean;
   todos: ToDoModel[];
+}
+
+export interface UserModelAdmin {
+  username: string;
+  email: string;
+  id: number;
+  createdAt: Date;
+  image: string | null;
+  isadmin: boolean;
 }

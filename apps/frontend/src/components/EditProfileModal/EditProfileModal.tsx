@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import svg from '../../../public/defaultppicture.svg';
+import svg from '../../../src/images/defaultppicture.svg';
 import './EdipProfileModal.scss';
 
 interface EditProfileModalProps {
@@ -26,12 +26,6 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
   const [localEmail, setLocalEmail] = useState<string>('');
   const [localUsername, setLocalUsername] = useState<string>('');
   const [alert, setAlert] = useState({ type: '', message: '', header: '' });
-  const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState('');
-
-  const handleCheckboxChange = () => {
-    setShowPassword(!showPassword);
-  };
 
   useEffect(() => {
     setLocalEmail(email);
@@ -106,12 +100,16 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
             {alert.message}
           </div>
         )}
-        <div className="modal-content ">
+        <div className="modal-content modal-content-M">
           <div className="modal-header">
             <h5 className="modal-title">Edit Profile</h5>
-            <button type="button" className="close" onClick={onHide}>
-              <span>&times;</span>
-            </button>
+            <button
+              type="button"
+              className="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              onClick={onHide}
+            ></button>
           </div>
           <div className="modal-body ">
             <div className="d-flex justify-content-center">
@@ -153,27 +151,6 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                   aria-describedby="basic-addon2"
                   onChange={(e) => setLocalEmail(e.target.value)}
                 />
-              </div>
-              <div className="input-group mb-3 w-50">
-                <span className="input-group-text" id="basic-addon1">
-                  P:
-                </span>
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  className="form-control"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <span className="input-group-text" id="basic-addon1">
-                  <input
-                    className="form-check-input mt-0"
-                    type="checkbox"
-                    value=""
-                    aria-label="Checkbox for following text input"
-                    onChange={handleCheckboxChange}
-                  />
-                </span>
               </div>
             </div>
           </div>

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { UserModel } from '../../models/user.model';
-import svg from '../../../public/defaultppicture.svg';
+import svg from '../../../src/images/defaultppicture.svg';
 import './UserPage.scss';
 import EditProfileModal from '../../components/EditProfileModal/EditProfileModal';
 import { DeleteUserModal } from '../../components/DeleteUserModal/DeleteUserModal';
@@ -57,7 +57,7 @@ export const UserPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-         await getUserData(accessToken);
+        await getUserData(accessToken);
       } catch (error) {
         console.error('Error fetching user data', error);
       }
@@ -69,7 +69,7 @@ export const UserPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-         await getToDoData(accessToken);
+        await getToDoData(accessToken);
       } catch (error) {
         console.error('Error fetching user data', error);
       }
@@ -202,12 +202,14 @@ export const UserPage = () => {
         onHide={handleCloseAddNewToDoModal}
         show={showAddNewToDoModal}
         access_token={accessToken}
+        email={userData?.email || ''}
       />
       <EditToDo
         show={showToDoEditMoidal}
         onHide={handleCloseEitToDoModal}
         access_token={accessToken}
         todo={todoData ? todoData[selectedTodoItem] : undefined}
+        email={userData?.email || ''}
       />
     </div>
   );

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import './HomePage.scss';
-import svg from '../../../public/todo.svg';
+import svg from '../../../src/images/todo.svg';
 
 export const HomePage = () => {
   const navigate = useNavigate();

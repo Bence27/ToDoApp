@@ -6,6 +6,7 @@ import { UserModule } from './user/user.module';
 import { TodoModule } from './todo/todo.module';
 import { PrismamoduleModule } from './prismamodule/prismamodule.module';
 import { ConfigModule } from '@nestjs/config';
+import { EmailModule } from './email/email.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { ConfigModule } from '@nestjs/config';
     UserModule,
     TodoModule,
     PrismamoduleModule,
+    EmailModule,
     ConfigModule.forRoot({ isGlobal: true }),
   ],
 })
