@@ -10,7 +10,7 @@ Segédlet
 8. Új terminál
 9. cd apps/frontend
 10. npm install
-11. cd ../..
+11. cd ../ ..
 12. npm run bs
 13. localhost:3000 
 
