@@ -12,4 +12,5 @@ Segédlet
 10. cd ..
 11. cd ..
 12. npm run bs
-13.  
+
+Kérdés: bence2002327@gmail.com vagy telefonon
