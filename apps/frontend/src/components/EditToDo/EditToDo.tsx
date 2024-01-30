@@ -3,15 +3,17 @@ import { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ToDoModel } from '../../models/todo.model';
+import './EditToDo.scss';
 
 interface EditToDoProps {
   onHide: () => void;
   show: boolean;
   access_token: string;
   todo?: ToDoModel;
+  email: string;
 }
 
-export const EditToDo: React.FC<EditToDoProps> = ({ onHide, show, access_token, todo }) => {
+export const EditToDo: React.FC<EditToDoProps> = ({ onHide, show, access_token, todo, email }) => {
   const [alert, setAlert] = useState({ type: '', message: '', header: '' });
   const [localTitle, setLocalTitle] = useState('');
   const [localDescription, setLocalDescription] = useState('');
@@ -35,7 +37,8 @@ export const EditToDo: React.FC<EditToDoProps> = ({ onHide, show, access_token, 
           title: localTitle,
           description: localDescription,
           expireAt: locaExpireAt.toISOString(),
-          id: localToDoId
+          id: localToDoId,
+          email: email
         },
         {
           headers: {

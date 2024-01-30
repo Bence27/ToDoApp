@@ -33,4 +33,12 @@ export class UserService {
       where: { id: userDtoDelete.id },
     });
   }
+
+  async getAll() {
+    const allUser = await this.prismaService.user.findMany();
+    allUser.forEach((e) => {
+      delete e.hash;
+    });
+    return allUser;
+  }
 }

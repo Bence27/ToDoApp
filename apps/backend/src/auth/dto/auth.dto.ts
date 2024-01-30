@@ -21,3 +21,9 @@ export class AuthDtoLogin {
   @IsNotEmpty()
   password: string;
 }
+
+export class AuthDtoForAdmin {
+  @IsEmail()
+  @IsNotEmpty()
+  email: string;
+}

@@ -19,7 +19,11 @@ export const LoginPage = () => {
   };
 
   const navigateToUserPage = (userId: number, access_token: string) => {
-    navigate(`/user/${userId}`, { state: { Id: userId, Token: access_token } });
+    navigate(`/user/${userId}`, { state: { Token: access_token } });
+  };
+
+  const navigateToAdminPage = (userId: number, access_token: string, email: string) => {
+    navigate(`/admin/${userId}`, { state: { Token: access_token, Email: email } });
   };
 
   const handleLogin = async (e: { preventDefault: () => void }) => {
@@ -36,7 +40,11 @@ export const LoginPage = () => {
       setAlert({ type: 'success', message: 'Login was successful!', header: 'Success!' });
       setTimeout(() => {
         setAlert({ type: '', message: '', header: '' });
-        navigateToUserPage(response.data.id, response.data.access_token);
+        if (response.data.isadmin) {
+          navigateToAdminPage(response.data.id, response.data.access_token, response.data.email);
+        } else {
+          navigateToUserPage(response.data.id, response.data.access_token);
+        }
       }, 2000);
     } catch (error) {
       if (axios.isAxiosError(error)) {

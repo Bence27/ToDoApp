@@ -19,6 +19,8 @@ model User{
   username String
   image    String?
 
+  isadmin Boolean
+
   todos ToDo[]
   @@map("users")
   

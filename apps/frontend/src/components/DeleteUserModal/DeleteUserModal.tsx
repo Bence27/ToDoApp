@@ -7,20 +7,29 @@ interface DeleteUserModalProps {
   id: number;
   onHide: () => void;
   show: boolean;
-  access_token: string;
+  access_token: string | any;
+  admin?: boolean;
+  adminId?: number;
+  adminAccessToken?: string;
+  adminEmail?: string;
 }
 
 export const DeleteUserModal: React.FC<DeleteUserModalProps> = ({
   id,
   onHide,
   show,
-  access_token
+  access_token,
+  admin
 }) => {
   const [alert, setAlert] = useState({ type: '', message: '', header: '' });
   const navigate = useNavigate();
 
   const navigateToSignUp = () => {
-    navigate('/signup');
+    if (admin == undefined) {
+      navigate('/signup');
+    } else {
+      window.location.reload();
+    }
   };
 
   const handleOverlayClick = (e: React.MouseEvent) => {
@@ -71,12 +80,16 @@ export const DeleteUserModal: React.FC<DeleteUserModalProps> = ({
         </div>
       )}
       <div className="modal-dialog">
-        <div className="modal-content">
+        <div className="modal-content ">
           <div className="modal-header">
-            <h5 className="modal-title TitleModal">Delete User</h5>
-            <button type="button" className="close" onClick={onHide}>
-              <span>&times;</span>
-            </button>
+            <h5 className="modal-title TitleModalTitle">Delete User</h5>
+            <button
+              type="button"
+              className="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              onClick={onHide}
+            ></button>
           </div>
           <div className="modal-body">
             <p>The deletion is final and irreversible</p>
