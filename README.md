@@ -5,12 +5,13 @@ Segédlet
 3. a root mappában npm install
 4. cd apps/backend
 5. npm install
-6. npx prisma generate
-7. cd ..
-8. cd frontend
-9. npm install
-10. cd ..
+6. npm run db:dev:generate
+7. npx prisma generate
+8. cd ..
+9. cd frontend
+10. npm install
 11. cd ..
-12. npm run bs
+12. cd ..
+13. npm run bs
 
 Kérdés: bence2002327@gmail.com vagy telefonon
