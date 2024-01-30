@@ -5,7 +5,7 @@ Segédlet
 3. a root mappában npm install
 4. cd apps/backend
 5. npm install
-6. npm run db:dev:generate
+6. npm run db:dev:restart
 7. npx prisma generate
 8. cd ..
 9. cd frontend
